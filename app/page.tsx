@@ -1,14 +1,18 @@
 'use client';
 
+import HypermediaUploader from '../src/utils/uploader';
+
+// SECRET KEY HERE
+const hyperUploader = new HypermediaUploader(
+process.env.NEXT_PUBLIC_HYPERMEDIA_SECRET_KEY
+);
+
 export default function Home() {
   const handleChange = async (event: any) => {
-    const formData = new FormData();
-    formData.append('file', event.target.files[0]);
+    const uploadResponse = await hyperUploader.upload(event.target.files[0]);
 
-    await fetch('http://localhost:3000/upload', {
-      method: 'POST',
-      body: formData,
-    });
+    console.log(uploadResponse);
+
   };
 
   return (
