@@ -3,14 +3,11 @@
 import HypermediaUploader from '../src/utils/uploader';
 
 // SECRET KEY HERE
-const hyperUploader = new HypermediaUploader(
-process.env.NEXT_PUBLIC_HYPERMEDIA_SECRET_KEY
-);
+const hyperUploader = new HypermediaUploader('https://google.com');
 
 export default function Home() {
   const handleChange = async (event: any) => {
     const uploadResponse = await hyperUploader.upload(event.target.files[0]);
-
     console.log(uploadResponse);
 
   };

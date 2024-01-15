@@ -3,13 +3,21 @@ import { getUploadInformation, saveFile } from './';
 
 
 class TusClient {
-  constructor(key) {
-    this.key = key;
+  constructor(endpoint) {
+    this.endpoint = endpoint;
   }
+
+async getUploadInformation() {
+  try {
+    await fetch('')
+  } catch (error) {
+    
+  }
+}
 
   async upload(file) {
     try {
-      const response = await getUploadInformation(file.name, file.size, this.key);
+      const response = await getUploadInformation(this.endpoint);
       const { data } = await response.json()
 
       const fileName = file.name
@@ -49,8 +57,8 @@ class TusClient {
               url: data.url,
               metadata: { videoId: data.video.guid },
             }
-
-            await saveFile(fileToSave, this.key);
+                
+            await saveFile(fileToSave, this.endpoint);
           },
       });
 
